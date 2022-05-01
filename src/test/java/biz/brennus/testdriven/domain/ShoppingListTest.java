@@ -37,4 +37,27 @@ public class ShoppingListTest {
         assertThat(shoppingList.getShoppingItems()).contains(syr);
     }
 
+    @Test
+    public void shouldSumUpTheIngredientAmountsInCauseOfSameIngredients() {
+        // Given
+        ShoppingList shoppingList = new ShoppingList();
+
+        Ingredient kuraciePrsia100g = new Ingredient("kuracie prsia", 100, "g");
+        Ingredient kuraciePrsia200g = new Ingredient("kuracie prsia", 200, "g");
+
+        Recipe chickenKorma = new Recipe("Chicken korma");
+        chickenKorma.addIngredient(kuraciePrsia100g);
+
+        Recipe kuraNaCitronovejTrave = new Recipe("Kura na citrónovej tráve");
+        kuraNaCitronovejTrave.addIngredient(kuraciePrsia200g);
+
+        // When
+        shoppingList.addRecipe(chickenKorma);
+        shoppingList.addRecipe(kuraNaCitronovejTrave);
+
+        // Then
+        Ingredient kuraciePrsiaSum = shoppingList.getShoppingItems().get(0);
+        assertThat(kuraciePrsiaSum.getAmount()).isEqualTo(300);
+    }
+
 }

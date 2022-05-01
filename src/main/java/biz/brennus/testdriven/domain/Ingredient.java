@@ -1,5 +1,6 @@
 package biz.brennus.testdriven.domain;
 
+import java.util.Objects;
 import lombok.Data;
 
 @Data
@@ -16,5 +17,22 @@ public class Ingredient {
         this.name = name;
         this.amount = amount;
         this.unit = unit;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Ingredient that = (Ingredient) o;
+        return name.equals(that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }
