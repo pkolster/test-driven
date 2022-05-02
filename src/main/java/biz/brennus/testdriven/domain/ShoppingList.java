@@ -7,22 +7,22 @@ import lombok.Data;
 
 @Data
 public class ShoppingList {
-    private List<Ingredient> shoppingItems = new ArrayList<>();
+    private List<IngredientOfRecipe> shoppingItems = new ArrayList<>();
 
     public void addRecipe(Recipe recipe) {
-        List<Ingredient> ingredientList = recipe.getIngredientList();
-        for (Ingredient ingredient: ingredientList) {
-            Optional<Ingredient> found = findIngredient(ingredient.getName());
+        List<IngredientOfRecipe> ingredientList = recipe.getIngredientList();
+        for (IngredientOfRecipe ingredientOfRecipe: ingredientList) {
+            Optional<IngredientOfRecipe> found = findIngredientOfRecipe(ingredientOfRecipe.getIngredient().getName());
             if (found.isEmpty()) {
-                shoppingItems.add(ingredient);
+                shoppingItems.add(ingredientOfRecipe);
             } else {
-                Ingredient foundIngredient = found.get();
-                foundIngredient.setAmount(foundIngredient.getAmount() + ingredient.getAmount());
+                IngredientOfRecipe foundIngredient = found.get();
+                foundIngredient.setAmount(foundIngredient.getAmount() + ingredientOfRecipe.getAmount());
             }
         }
     }
 
-    public Optional<Ingredient> findIngredient(String name) {
-        return shoppingItems.stream().filter(ingredient -> ingredient.getName().equals(name)).findFirst();
+    public Optional<IngredientOfRecipe> findIngredientOfRecipe(String name) {
+        return shoppingItems.stream().filter(ingredientOfRecipe -> ingredientOfRecipe.getIngredient().getName().equals(name)).findFirst();
     }
 }

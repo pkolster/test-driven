@@ -10,13 +10,13 @@ public class RecipeTest {
     public void shouldAddIngredient() {
         // Given
         Recipe chlebaSMaslom = new Recipe("Chleba s maslom");
-        Ingredient chlieb = new Ingredient("chlieb", 0.1, "ks");
-        Ingredient maslo = new Ingredient("maslo", 0.05, "ks");
+        Ingredient chlieb = new Ingredient("chlieb", "ks");
+        Ingredient maslo = new Ingredient("maslo", "ks");
         // When
-        chlebaSMaslom.addIngredient(chlieb);
-        chlebaSMaslom.addIngredient(maslo);
+        chlebaSMaslom.addIngredient(chlieb, 0.1);
+        chlebaSMaslom.addIngredient(maslo, 0.05);
         // Then
-        assertThat(chlebaSMaslom.getIngredientList()).contains(chlieb);
-        assertThat(chlebaSMaslom.getIngredientList()).contains(maslo);
+        assertThat(chlebaSMaslom.getIngredientList().get(0).getIngredient()).isEqualTo(chlieb);
+        assertThat(chlebaSMaslom.getIngredientList().get(1).getIngredient()).isEqualTo(maslo);
     }
 }
